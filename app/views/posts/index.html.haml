@@ -1,0 +1,23 @@
+%table.table
+  - @posts.each do |post|
+    %tr
+      %td{style: "width: 12px"}
+        = link_to upvote_post_path(post), remote: true do
+          %i.fa.fa-sort-up
+        %br
+        = post.rank || 0
+        %br
+        = link_to downvote_post_path(post), remote: true do
+          %i.fa.fa-sort-down
+      %td{style: "width: 200px"}
+        = link_to post.link do 
+          = image_tag post.image_url, size: "200x200"
+      %td
+        = link_to post.link do 
+          = post.title
+        %br
+        = "posted: #{post.created_at} by #{post.user.username}"
+
+%br
+
+= link_to 'New Post', new_post_path
